@@ -1,0 +1,47 @@
+<!doctype html>
+<html>
+<head>
+    <title>Correlativas</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/x-icon" sizes="16x16" href="favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/icon32.png">
+    <link rel="icon" type="image/png" sizes="64x64" href="assets/icon64.png">
+    <link rel="icon" type="image/svg" sizes="any" href="assets/icon.svg">
+    <link rel="stylesheet" href="estilo.css">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="codigo.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body>
+    <div id="obligatorias"></div>
+    <div class="container">
+        <div class="container-title">Electivas</div>
+        <ul id="electivas" class="materias">
+        </ul>
+        <div class="container-body">
+            <form>
+            <input type="text" id="in-nomElect" placeholder="Nombre de la electiva" maxlength="32">
+            <select id="sl-hrsElect">
+                <option value="" disabled selected>Horas</option>
+                <option value="2">2 horas</option>
+                <option value="3">3 horas</option>
+                <option value="4">4 horas</option>
+                <option value="6">6 horas</option>
+                <option value="8">8 horas</option>
+            </select>
+            <input type="button" id="bt-newElect" value="Agregar">
+            </form>
+        </div>
+    </div>
+    <div class="container">
+        <div class="container-title">Información</div>
+        <div class="container-body">
+            Horas Obligatorias: <span id="sp-oblact"></span> / <span id="sp-obltot"></span> (<span id="sp-curact"></span> cursadas)<br>
+            Horas Electivas: <span id="sp-eleact"></span> / <span id="sp-eletot"></span><br>
+            Progreso: <span id="sp-progreso"></span>%<br>
+            <input type="button" id="bt-guardar" value="Guardar datos">
+            <input type="button" id="bt-borrar" value="Borrar datos">
+        </div>
+    </div>
+</body>
+</html>
