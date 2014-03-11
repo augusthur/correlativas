@@ -1,5 +1,5 @@
 var estados = ['m-nocursada', 'm-cursada', 'm-aprobada'];
-var estadosDOM = ['(no cursada)', '(cursada)', '(aprobada)'];
+var estadosDOM = ['(no cursada)', '(regular)', '(aprobada)'];
 var condiciones = ['m-nocursable', 'm-cursable', 'm-aprobable'];
 var materias = new Array();
 var hrsObligTot = 0;
@@ -141,7 +141,7 @@ function dibujarMaterias() {
         matJQ.addClass(estados[mat.est]);
         matJQ.data("id", i);
         $('<span class="nombre-mat">'+materias[i].nom+'</span>').appendTo(matJQ);
-        $('<span class="estado-mat">(no cursada)</span>').appendTo(matJQ);
+        $('<span class="estado-mat">'+estadosDOM[materias[i].est]+'</span>').appendTo(matJQ);
         matJQ.appendTo('#'+anoDOM);
         matJQ.click(function() {
             var idMateria = $(this).data("id");
