@@ -7,6 +7,7 @@ var hrsObligAct = 0;
 var hrsElectTot = 0;
 var hrsElectAct = 0;
 var hrsCursadas = 0;
+var matAprobads = 0;
 var excepcion;
 
 $(document).ready(function() {
@@ -25,15 +26,16 @@ $(document).ready(function() {
 });
 
 function cargarLocal() {
-    hrsObligTot = parseInt(localStorage.getItem("co-oblig"));
     hrsElectTot = parseInt(localStorage.getItem("co-elect"));
     materias = JSON.parse(localStorage.getItem("co-materias"));
     var i;
     for (i=1; i<materias.length; i++) {
+        hrsObligTot += materias[i].hrs;
         if (materias[i].est >= 1) {
             hrsCursadas += materias[i].hrs;
             if (materias[i].est == 2) {
                 hrsObligAct += materias[i].hrs;
+                matAprobads++;
             }
         }
     }
@@ -90,7 +92,6 @@ function iniciar() {
     });
     $('#bt-guardar').click(function() {
         localStorage.setItem("co-materias", JSON.stringify(materias));
-        localStorage.setItem("co-oblig", hrsObligTot.toString());
         localStorage.setItem("co-elect", hrsElectTot.toString());
         localStorage.setItem("co-excepcion", excepcion.checked.toString());
         var electivas = new Array();
@@ -104,7 +105,6 @@ function iniciar() {
     $('#bt-borrar').click(function() {
         localStorage.removeItem("co-materias");
         localStorage.removeItem("co-electivas");
-        localStorage.removeItem("co-oblig");
         localStorage.removeItem("co-elect");
         localStorage.removeItem("co-excepcion");
         alert("Los datos fueron limpiados de su navegador.");
@@ -241,6 +241,14 @@ function calcularCondicion(id) {
 function modificarProgreso(hrsObl, hrsEle) {
     hrsObligAct += hrsObl;
     hrsElectAct += hrsEle;
+    if (hrsObl > 0)
+        matAprobads++;
+    else if (hrsObl < 0)
+        matAprobads--;
+    if (hrsEle > 0)
+        matAprobads++;
+    else if (hrsEle < 0)
+        matAprobads--;
     var hrsAct = hrsObligAct;
     if (hrsElectAct < hrsElectTot)
         hrsAct += hrsElectAct;
@@ -249,6 +257,7 @@ function modificarProgreso(hrsObl, hrsEle) {
     var progreso = hrsAct / (hrsObligTot+hrsElectTot) * 100;
     $("#sp-oblact").text(hrsObligAct);
     $("#sp-eleact").text(hrsElectAct);
+    $("#sp-matapr").text(matAprobads);
     $("#sp-progreso").text(progreso.toFixed(2));
 }
 
